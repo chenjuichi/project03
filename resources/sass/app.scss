@@ -1,1 +1,21 @@
-//
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Poppins:600&display=swap'); //add google font, 2020-11-13
+
+// Variables
+@import 'variables';
+
+// add fontawesome free icons
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/regular.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss';
+
+// add Vuetify
+@import "~vuetify/dist/vuetify.min.css";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// add material design icons
+@import '~@mdi/font/scss/materialdesignicons.scss';

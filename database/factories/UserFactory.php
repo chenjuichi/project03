@@ -18,6 +18,12 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+    /* 
+    //  Faker\Factory can take a locale as an argument, 
+    //  to return localized data. If no localized provider 
+    //  is found, the factory fallbacks to the default locale (en_US).
+    */
+    //$faker = Faker\Factory::create('zh_TW');    
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,

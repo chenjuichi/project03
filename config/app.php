@@ -103,7 +103,8 @@ return [
     | This locale will be used by the Faker PHP library when generating fake
     | data for your database seeds. For example, this will be used to get
     | localized telephone numbers, street address information and more.
-    |
+    | 
+    指定Faker 使用中文時, 設為'zh_TW'
     */
 
     'faker_locale' => 'en_US',
