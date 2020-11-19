@@ -77,7 +77,7 @@ const app = new Vue({
   store,
 
   components: {   //local registration
-    'welcome': Welcome,
+    hello': Hello,
   },
 
   async beforeCreate() {
