@@ -29,7 +29,21 @@ Route::middleware('auth')->get('/user', function (Request $request) {
 });
 
 //Route::get('/home', 'HomeController@index')->name('home');
+
 //add 2020-11-12
 Route::get('/{any?}', function () {
     return view('welcome');
 })->where('any', '^(?!api\/)[\/\w\.-]*');
+
+Route::middleware('auth')->group(function () {
+    Route::resource('/api/admin/users', 'Admin\UsersController', ['except' => ['show', 'create', 'store']]);
+    Route::resource('/api/roles', 'Role\RolesController');
+    Route::get('/api/customer/roles/{id}/{roleId?}', [
+        'as' => 'roles.show',
+        'uses' => 'Role\CustomerRolesController@show',
+    ]);
+    Route::get('/api/customer/admin/users', 'Admin\CustomerUsersController@getAllUsersAndUserRoles');
+    Route::post('/api/customer/rolesList', 'Admin\CustomerUsersController@rolesList');
+
+	//Route::get('/api/admin/lang/{locale}', 'LocalizationController@index');
+});

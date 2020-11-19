@@ -20,6 +20,15 @@ class PermissionServiceProvider extends ServiceProvider
     }
 
     /**
+     * The policy mappings for the application.
+     *
+     * @var array
+     */
+    protected $policies = [
+            
+    ];
+
+    /**
      * Bootstrap services.
      *
      * @return void
@@ -32,26 +41,10 @@ class PermissionServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         //Admin check
-        if (Gate::allows('create-tasks')) {
-            Gate::define('create-tasks', function($user) {
-                //return $user->hasRole('administrator');
-                return $user->hasPermissionTo('create-tasks');
-            });
-        }
-
-        //user check
-        Gate::define('isUser', function($user){
-            return $user->hasRole('user');
-        });
-        
-        //manager check
-        Gate::define('isManager', function($user){
-            return $user->hasRole('manager');
-        });
-
-        //author check
-        Gate::define('isAuthor', function($user){
-            return $user->hasRole('author');
+        Gate::define('isAdmin', function($user) {
+            //return $user->hasRole('administrator');
+            //return $user->hasPermissionTo('create-tasks');
+            return true;
         });
 
         /*        
