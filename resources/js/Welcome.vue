@@ -230,7 +230,11 @@ export default {
         //    console.log("hello doneRolesGet: ", this.$store.getters.currentLoginUserRoles)
             return this.$store.getters.currentLoginUserRoles;
             //return this.$store.getters.currentLoginUserData;
-        }
+        },
+
+        doneLoginCheck() {
+            return this.$store.getters.checkLogin;
+        },
     },
 	data() {
 		return {
@@ -275,10 +279,11 @@ export default {
     watch: {
 //        'userWithRoles': function() {
         'user': function() {
-            console.log("watch roles....")
-            console.log("watch doneRolesGet....", this.doneRolesGet);
-            //console.log("a. watch for roles: ", this.userWithRoles.roles);
-            this.routePage();
+            if (doneLoginCheck())  {
+                console.log("watch roles....");
+                console.log("watch doneRolesGet....", this.doneRolesGet);
+                this.routePage();
+            }           
         },
         'registerUser.email': function () {
 			//Regular expression Testing

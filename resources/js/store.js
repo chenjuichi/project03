@@ -300,6 +300,9 @@ export default {
         currentLoginUserToken(state) {
     		return state.token;
         },
+        checkLogin(state) {
+    		return state.isLoggedIn;
+        },
 	},	//end getters
 };
 

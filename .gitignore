@@ -2,3 +2,5 @@
 /public
 /storage/framework
 /vendor
+/.vscode
+#/.gitignore
