@@ -5,12 +5,14 @@
  */
 
 require('./bootstrap');
+
 //=== import from node_modules directory
 import Vuetify from  "vuetify";
 import Vuex from "vuex";
 import VueRouter from "vue-router";
-import moment from "moment";
 import VueI18n from "vue-i18n";
+//import moment from "moment";
+//var moment = require('moment');
 //===
 
 //=== import from resources/js
@@ -61,9 +63,9 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 //===
 Vue.component("hello", Hello);
 Vue.component("v-errors", ValidationErrors);
-Vue.filter("formatDate", function(date) {               //Filter 代入的參數 formatDate
-    return moment(date).format('MMMM Do YYYY');
-});
+//Vue.filter("formatDate", function(date) {               //Filter 代入的參數 formatDate
+//    return moment(date).format('MMMM Do YYYY');
+//});
 //===
 
 //===

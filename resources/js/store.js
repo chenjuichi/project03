@@ -58,7 +58,11 @@ export default {
 				commit('SET_BASKET', currentObjs);
 			}
 
-			commit('SET_LOGGED_IN', isLoggedIn());
+			const current_isLoggedIn = isLoggedIn();
+
+			commit('SET_LOGGED_IN', current_isLoggedIn);
+		
+			console.log("SET_LOGGED_IN is: ", current_isLoggedIn);
 		},
 
   		async loadedAllUsers({ commit }) {
@@ -180,9 +184,18 @@ export default {
 			}
 		},
 
-
 		logout({ commit }) {
+			//answer 1
+			//commit('SET_USER_FOR_DELETE', {});
+
+			//answer 2
+			//const committing = this._committing;
+			//this._committing = true;	
+      		//Vue.set(this.state, 'user', {}); 
+			//this._committing = committing;
+			//answer 3
 			commit('SET_USER', {});
+
 			commit('SET_LOGGED_IN', false);
 			logOut();
 		},
@@ -232,6 +245,11 @@ export default {
             state.allUsersAndUserRoles = payload.slice(0);
         },
 
+		SET_USER_FOR_DELETE(state, payload) {
+			console.log("deleted user object");
+			state.user = {};
+		},
+
 		SET_USER(state, payload) {
 			state.user = payload;
 		},
@@ -267,6 +285,7 @@ export default {
 			state.isLoginOrRegisterPanel = payload;
 		},
 	},	//end mutations
+	
 /* == vuex getters == */
 	getters: {
         getEnableShowImage: (state) => state.enableShowImage,

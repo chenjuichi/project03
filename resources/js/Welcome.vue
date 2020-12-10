@@ -278,12 +278,13 @@ export default {
     },
     watch: {
 //        'userWithRoles': function() {
+        //'isLoggedIn': function() {
         'user': function() {
-            if (doneLoginCheck())  {
+            //if (doneLoginCheck())  {
                 console.log("watch roles....");
                 console.log("watch doneRolesGet....", this.doneRolesGet);
                 this.routePage();
-            }           
+            //}           
         },
         'registerUser.email': function () {
 			//Regular expression Testing
@@ -371,12 +372,15 @@ export default {
         routePage() {
             //console.log("routePage->role is: ", this.userWithRoles.roles);
             //if (this.userWithRoles.roles.includes("administrator")) {
+            if (this.isLoggedIn)  {
+
             if (this.doneRolesGet.includes("administrator")) {
                 console.log("role is administrator....");
                 this.$router.push("hello1");
             } else {
                 console.log("role is NOT administrator....");
                 this.$router.push("hello2");
+            }
             }
         }
 

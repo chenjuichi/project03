@@ -31,13 +31,13 @@
                 <a href="#" class="nav-item nav-link"><i class="fa fa-envelope"></i><span>Messages</span></a>
                 <a href="#" class="nav-item nav-link"><i class="fa fa-bell"></i><span>Notifications</span></a>
                 <div class="nav-item dropdown">
-                    <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar"> Antonio Moreno <b class="caret"></b></a>
+                    <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar"> {{ user.name }} <b class="caret"></b></a>
                     <div class="dropdown-menu">
                         <a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
                         <a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> Calendar</a>
                         <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
                         <div class="divider dropdown-divider"></div>
-                        <a href="#" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
+                        <a href="#" @click.prevent="logout" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
                     </div>
                 </div>
             </div>
@@ -112,6 +112,9 @@ export default {
 			try {
 				axios.post("/logout");
 				this.$store.dispatch("logout");
+                this.$router.push('/');
+                console.log("click logout dropdown-item.....")
+
 			} catch (error) {
 				this.$store.dispatch("logout");
 			}
