@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+//use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,5 +25,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        //DB::listten(function ($query) {
+        //    var_dump($query->sql);
+        //    var_dump($query->binding ?? 'no binding');
+        //    var_dump($query->time);
+        //});
     }
 }
