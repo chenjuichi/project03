@@ -48,8 +48,21 @@ class Handler extends ExceptionHandler
      *
      * @throws \Throwable
      */
-    public function render($request, Throwable $exception)
+    //public function render($request, Throwable $exception)
+    //{
+    //    return parent::render($request, $exception);
+    //}
+
+    // 2021-02-08, modify for post file into imgur, for error:
+    // Laravel catch TokenMismatchException            
+    public function render($request, Throwable $e)
     {
-        return parent::render($request, $exception);
+        if ($e instanceof \Illuminate\Session\TokenMismatchException) {
+            return redirect()
+                ->back()
+                ->withInput($request->except('_token'))
+                ->withMessage('Your explanation message depending on how much you want to dumb it down, lol!');
+        }
+        return parent::render($request, $e);
     }
 }

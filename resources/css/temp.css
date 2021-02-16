@@ -1,0 +1,283 @@
+/*ADMIN*/
+._1adminOverveiw_card {
+    display: flex;
+    padding: 20px 14px;
+    color: #0099ff !important;
+}
+._1adminOverveiw_card_left {
+    flex: 1 1;
+}
+
+._1adminOverveiw_card_right {
+}
+
+._1adminOverveiw_card_right i {
+    font-size: 43px;
+}
+
+._1adminOverveiw_card_left_num {
+    font-weight: 600;
+    font-size: 17px;
+    margin: 0 0 3px;
+}
+
+._1adminOverveiw_bg_four {
+    color: #00bcd4;
+}
+
+._1adminOverveiw_bg_three {
+    color: #ff5722;
+}
+
+._1adminOverveiw_bg_two i {
+    font-weight: bold;
+}
+
+._1adminOverveiw_bg_two {
+    color: #009688;
+}
+
+._1adminOverveiw_bg_one {
+    color: #e91e63;
+}
+
+._1adminOverveiw_card_left_title {
+    color: #222;
+}
+
+._1adminOverveiw_table_recent {
+}
+
+._table_name {
+    font-weight: 600;
+    color: #383737;
+    max-width: 415px;
+    display: -webkit-box;
+    max-height: 3.2rem;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 2;
+}
+
+._table_pro {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #383737;
+}
+
+._num {
+    background: #6da5f3;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 22px;
+}
+
+._text_right {
+    text-align: right;
+}
+
+._text {
+    font-size: 16px;
+}
+
+._title {
+    font-size: 4rem;
+}
+
+._title2 {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+._title0 {
+    color: #222;
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-right: 20px; /* add */
+}
+
+._title3 {
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: unset;
+}
+
+._text_center {
+    text-align: center;
+}
+
+._border_color {
+    border-color: #f3f3f3 !important;
+}
+
+._color {
+    color: #0266ed;
+}
+/*****/
+
+._box_shadow {
+    background: #fff;
+    -webkit-box-shadow: 0 10px 20px rgba(47, 91, 231, 0.1);
+    box-shadow: 0 10px 20px rgba(47, 91, 231, 0.1);
+}
+
+._border_radious {
+    border-radius: 3px;
+}
+
+._p20 {
+    padding: 18px 20px 25px;
+}
+
+._mar_b30 {
+    margin-bottom: 30px;
+}
+
+._mar_top {
+    margin-top: 35px;
+    margin-top: 22px;
+}
+
+._overflow {
+    overflow: auto;
+}
+
+._flex_space {
+    flex: 1 1;
+}
+
+._bg {
+    background: #0099ff;
+}
+
+._btn:hover {
+    background: #0551b7;
+}
+
+._btn {
+    border: none;
+    font-size: 14px;
+    background: #0266ed;
+    color: #fff;
+    border-radius: 3px;
+    transition: 0.3s all ease;
+    padding: 3px 11px;
+    cursor: pointer;
+    background: #0099ff;
+}
+
+._btn:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+._action_btn {
+    padding: 2px 8px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+button.submit {
+    margin-right: 20px;
+}
+
+button.submit,
+button.cancel {
+    padding: 10px 50px;
+    background-color: #0099ff;
+    color: #fff;
+    border-radius: 4px;
+    border: 1px solid #0099ff;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+button.submit,
+button.cancel {
+    padding: 10px 50px;
+    border-radius: 4px;
+    border: 1px solid #0099ff;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+button.cancel {
+    background-color: #fafafa;
+    color: #000;
+    border-color: #c7c7c7;
+}
+
+.view_btn1 {
+    background-color: #34495e;
+}
+
+.edit_btn1 {
+    background-color: #3498db;
+}
+
+.make_btn1 {
+    background-color: #ff5733;
+}
+
+.make_btn2 {
+    background-color: #28b463;
+}
+
+.make_btn3 {
+    background-color: #2471a3;
+}
+
+._table_div {
+}
+
+/*TABLE*/
+._table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+._table tr {
+}
+
+._table tr:first-child {
+    background: #a7ccff;
+    background: #0099ff;
+}
+
+._table tr:first-child:hover {
+    background: #0099ff;
+}
+
+._table tr:hover,
+._table tr:nth-child(even):hover {
+    background: #ecf9ff;
+}
+
+._table tr:nth-child(even) {
+    background: #ececec8c;
+}
+
+._table tr th {
+    border: 1px solid transparent;
+    text-align: left;
+    padding: 8px 13px;
+    color: #fff;
+    font-size: 15px;
+}
+
+._table tr td {
+    border: 1px solid #f3f3f3;
+    text-align: left;
+    padding: 8px 13px;
+    min-width: 103px;
+    font-size: 15px;
+}

@@ -1,27 +1,38 @@
 // Fonts
 //@import url('https://fonts.googleapis.com/css?family=Nunito');
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap');    //add google font, 2020-11-26
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap"); //add google font, 2020-11-26
 //@import url('https://fonts.googleapis.com/css?family=Poppins:600&display=swap'); //add google font, 2020-11-13
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');    //add google font, 2020-11-26
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"); //add google font, 2020-11-26
+
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap");
 // Variables
-@import 'variables';
+@import "variables";
 
 // add fontawesome free icons
-@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
-@import '~@fortawesome/fontawesome-free/scss/regular.scss';
-@import '~@fortawesome/fontawesome-free/scss/solid.scss';
-@import '~@fortawesome/fontawesome-free/scss/brands.scss';
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/regular.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
 
 // add Vuetify
 @import "~vuetify/dist/vuetify.min.css";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 
 // add material design icons
-@import '~@mdi/font/scss/materialdesignicons.scss';
+@import "~@mdi/font/scss/materialdesignicons.scss";
 
 // material icons
 //@import '~material-icons/iconfont/material-icons.scss';
 
-@import '~material-design-icons/iconfont/material-icons.css';
+@import "~material-design-icons/iconfont/material-icons.css";
+
+// for Vue Select
+//@import "vue-select/src/scss/vue-select.scss";
+
+// for bootstrap-select
+//@import "~bootstrap-select/dist/css/bootstrap-select.min.css";
+
+// for iView, 2021-01-21
+//@import "~view-design/dist/styles/iview.css";

@@ -347,8 +347,7 @@ export default {
 
                 logIn();
 
-                //this.$store.dispatch('loadUser');
-                //this.$store.dispatch('loadUserWithRoles');
+                this.$store.dispatch('loadUser');
 
                 const loginData = {
       			    username: this.loginEmail,
@@ -373,14 +372,17 @@ export default {
             //console.log("routePage->role is: ", this.userWithRoles.roles);
             //if (this.userWithRoles.roles.includes("administrator")) {
             if (this.isLoggedIn)  {
+                if (!this.doneRolesGet.includes("administrator")) {
+                    return;
+                }
 
-            if (this.doneRolesGet.includes("administrator")) {
-                console.log("role is administrator....");
-                this.$router.push("hello1");
-            } else {
-                console.log("role is NOT administrator....");
-                this.$router.push("hello2");
-            }
+                if (this.doneRolesGet.includes("administrator")) {
+                    console.log("role is administrator....");
+                    this.$router.push("hello1/hello12");
+                } else {
+                    console.log("role is NOT administrator....");
+                    this.$router.push("hello2");
+                }
             }
         }
 

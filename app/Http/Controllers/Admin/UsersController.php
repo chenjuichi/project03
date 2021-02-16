@@ -16,7 +16,10 @@ class UsersController extends Controller
     public function index()
     {
         //
-        return 'User index page';
+        $users = User::with('roles')->get();
+        //$users = User::with(['roles' => function ($query) {
+        //    $query->name;}])->get();
+        return response()->json(["users" => $users]);
     }
 
     /**

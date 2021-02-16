@@ -48,6 +48,11 @@
         <!-- 建立 Vue Router 連結-->
         <router-link to="/hello1/hello11"></router-link>
         <router-link to="/hello1/hello12"></router-link>
+        <router-link to="/hello1/hello131"></router-link>
+        <router-link to="/hello1/hello132"></router-link>
+        <router-link to="/hello1/hello133"></router-link>
+        <router-link to="/hello1/hello134"></router-link>
+        <router-link to="/hello1/hello135"></router-link>
     </div>
     <router-view></router-view> <!-- Vue Router 代入的內容 -->
 </div>
@@ -63,6 +68,8 @@ export default {
         CountryFlag,
         //vClickOutside,
     },
+   // props: ['imgurLink'],
+  //name: 'router-view',
     //directives: {
     //  clickOutside: vClickOutside.directive
     //},

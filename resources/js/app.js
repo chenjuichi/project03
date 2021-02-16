@@ -4,10 +4,11 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require("./bootstrap");
+require("../../node_modules/bootstrap-select/js/bootstrap-select");
 
 //=== import from node_modules directory
-import Vuetify from  "vuetify";
+import Vuetify from "vuetify";
 import Vuex from "vuex";
 import VueRouter from "vue-router";
 import VueI18n from "vue-i18n";
@@ -25,27 +26,37 @@ import { getLang } from "./utils/tool";
 import LangCn from "./i18n/zh-cn";
 import LangEn from "./i18n/en";
 import LangTw from "./i18n/zh-tw";
+
+import ViewUI from 'view-design';           //for iView, 2021-01-21
+import "view-design/dist/styles/iview.css"; //for iView, 2021-01-21
 //===
 
-window.Vue = require('vue');
+window.Vue = require("vue");
 //===
 Vue.use(Vuex);
 Vue.use(VueRouter);
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
-  return originalPush.call(this, location).catch(err => err)
-}
+    return originalPush.call(this, location).catch(err => err);
+};
 Vue.use(Vuetify);
 Vue.use(VueI18n);
 const i18n = new VueI18n({
-  locale: getLang(),  //讀取语言配置
-  messages: {
-    'cn': LangCn,
-    'en': LangEn,
-    'tw': LangTw,
-  }
+    locale: getLang(), //讀取语言配置
+    messages: {
+        cn: LangCn,
+        en: LangEn,
+        tw: LangTw
+    }
 });
 console.log("i18n: ", i18n);
+
+Vue.use(ViewUI);    //for iView, 2021-01-21
+//===
+
+import common from "./library/common";
+Vue.mixin(common);
+
 //===
 
 /**
@@ -59,7 +70,10 @@ console.log("i18n: ", i18n);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component(
+    "example-component",
+    require("./components/ExampleComponent.vue").default
+);
 //===
 Vue.component("hello", Hello);
 Vue.component("v-errors", ValidationErrors);
@@ -73,22 +87,23 @@ const store = new Vuex.Store(storeDefinition);
 //===
 
 const app = new Vue({
-  vuetify: new Vuetify(),
-  el: '#app',
-  router,
-  store,
+    vuetify: new Vuetify(),
+    el: "#app",
+    router,
+    store,
 
-  components: {   //local registration
-    'hello': Hello,
-  },
+    components: {
+        //local registration
+        hello: Hello
+    },
 
-  async beforeCreate() {
-      this.$store.dispatch('loadStoredState');
-      console.log("hello----");
-      this.$store.dispatch('loadUser');
+    async beforeCreate() {
+        this.$store.dispatch("loadStoredState");
+        console.log("hello----");
+        this.$store.dispatch("loadUser");
 
-      //the following code is for testing
-      /*
+        //the following code is for testing
+        /*
       await axios.get('sanctum/csrf-cookie');
       await axios.post("/login", {
         email: 'howell.reinger@example.net',
@@ -96,7 +111,5 @@ const app = new Vue({
       });
       await axios.get("/user");
       */
-  },
-
+    }
 });
-

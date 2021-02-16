@@ -34,6 +34,8 @@ Route::middleware('auth')->get('/user', function (Request $request) {
 Route::get('/{any?}', function () {
     return view('welcome');
 })->where('any', '^(?!api\/)[\/\w\.-]*');
+//})->where('any', '*');
+
 
 Route::middleware('auth')->group(function () {
     Route::resource('/api/admin/users', 'Admin\UsersController', ['except' => ['show', 'create', 'store']]);
@@ -44,6 +46,23 @@ Route::middleware('auth')->group(function () {
     ]);
     Route::get('/api/customer/admin/users', 'Admin\CustomerUsersController@getAllUsersAndUserRoles');
     Route::post('/api/customer/rolesList', 'Admin\CustomerUsersController@rolesList');
+    //Route::post('/api/customer/attatchedRole/{idAndRole}', 'Admin\CustomerUsersController@attatchedRole');
+    Route::post('/api/customer/attatchedRole', 'Admin\CustomerUsersController@attatchedRole');
 
-	//Route::get('/api/admin/lang/{locale}', 'LocalizationController@index');
+    //Route::get('/api/admin/lang/{locale}', 'LocalizationController@index');
+
+    Route::post('/api/create_tag', 'AdminController@addTag');
+    Route::post('/api/edit_tag', 'AdminController@editTag');
+    Route::post('/api/delete_tag', 'AdminController@deleteTag');
+    Route::get('/api/get_tags', 'AdminController@getTag');
+    Route::post('/api/upload', 'AdminController@upload');
+    Route::post('/api/delete_image', 'AdminController@deleteImage');
+    //Route::post('/api/create_tag', 'AdminController@test');
+
+    Route::post('/api/create_category', 'AdminController@addCategory');
+    Route::get('/api/get_category', 'AdminController@getCategory');
+    Route::post('/api/edit_category', 'AdminController@editCategory');
+    Route::post('/api/delete_category', 'AdminController@deleteCategory');
+
+    Route::post('/api/postPicture', 'AdminController@postPicture');
 });

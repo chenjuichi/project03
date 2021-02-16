@@ -54,7 +54,40 @@
                             <li class="header-menu">
                                 <span>General</span>
                             </li>
-                            <li class="sidebar-dropdown" v-bind:class="[{'active': isSidebarDropdown[0]}]">  
+                            <li class="sidebar-dropdown">
+                                <a @click="watchListUsers" style="cursor: pointer;">
+                                    <i class="fas fa-users"></i>
+                                    <span class="menu-text">List Users</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-dropdown">
+                                <a @click="watchListRoles" style="cursor: pointer;">
+                                    <i class="fas fa-users"></i>
+                                    <span class="menu-text">List Roles</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-dropdown">
+                                <a @click="watchListRolesTemp" style="cursor: pointer;">
+                                    <i class="fas fa-users"></i>
+                                    <span class="menu-text">List RolesTemp</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-dropdown">
+                                <a @click="watchTags" style="cursor: pointer;">
+                                    <i class="fas fa-users"></i>
+                                    <span class="menu-text">Tags</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-dropdown">
+                                <a @click="watchCategories" style="cursor: pointer;">
+                                    <i class="fas fa-users"></i>
+                                    <span class="menu-text">Categories</span>
+                                </a>
+                            </li>
+
+                            <li 
+                                class="sidebar-dropdown" 
+                                v-bind:class="[{'active': isSidebarDropdown[0]}]">  
                                 <a href="#" @click="clickSidebarDropdown(0)">
                                     <i class="fa fa-tachometer-alt"></i>
                                     <span class="menu-text">Dashboard</span>
@@ -199,7 +232,6 @@
                 <!-- sidebar-footer  -->
                 <div class="sidebar-footer">
                     <div class="dropdown">
-
                         <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-bell"></i>
                             <span 
@@ -341,8 +373,7 @@
                 </div>
             </nav>
             <!-- page-content  -->
-            <div class="page-content pt-2">
-                                                 
+            <div class="page-content pt-2">                                                 
                 <!--
                 <div id="overlay" class="overlay" @click.prevent="toggleSidebar">
                     HELLO
@@ -567,6 +598,7 @@ export default {
     },
 	data() {
 		return {
+            myHandle: null,
         	window: {
         	    width: 0,
         	    height: 0
@@ -622,10 +654,10 @@ export default {
         console.log("vue destroyed()...")
 
         this.removeEvent();
-        //this.$refs.sidebar.removeEventListener('mouseover', this.handleMouseover);
-        //this.$refs.sidebar.removeEventListener('mouseout', this.handleMouseout);
+        //this.myHandle.removeEventListener('mouseover', this.handleMouseover);
+        //this.myHandle.removeEventListener('mouseout', this.handleMouseout);
 
-        $(this.$el).find('.sidebar-content').mCustomScrollbar("destroy");
+        //$(this.$el).find('.sidebar-content').mCustomScrollbar("destroy");
 
 	},	
 	computed: {
@@ -669,12 +701,17 @@ export default {
 			}
 		},
         addEvent() {
-            this.$refs.sidebar.addEventListener('mouseover', this.handleMouseover);
-            this.$refs.sidebar.addEventListener('mouseout', this.handleMouseout);
+            let vm = this;
+            this.myHandle = vm.$refs.sidebar;
+            this.$refs.sidebar.addEventListener('mouseover', vm.handleMouseover);
+            this.$refs.sidebar.addEventListener('mouseout', vm.handleMouseout);
         },
         removeEvent() {
-            this.$refs.sidebar.removeEventListener('mouseover', this.handleMouseover);
-            this.$refs.sidebar.removeEventListener('mouseout', this.handleMouseout);
+            //let vm = this;
+            //vm.$refs.sidebar.removeEventListener('mouseover', vm.handleMouseover);
+            //vm.$refs.sidebar.removeEventListener('mouseout', vm.handleMouseout);
+            this.myHandle.removeEventListener('mouseover', this.handleMouseover);
+            this.myHandle.removeEventListener('mouseout', this.handleMouseout);
         },
         handleMouseover() {
             console.log('mouse enter...');
@@ -779,10 +816,22 @@ export default {
         	        break;
   		        }
             }
+        },
+        watchListUsers() {
+                this.$router.push('/hello1/hello131');
         },  
-        //customScrollBar() {
-        //
-        //},              
+        watchListRoles() {
+                this.$router.push('/hello1/hello132');
+        },  
+        watchListRolesTemp() {
+                this.$router.push('/hello1/hello133');
+        },  
+        watchTags() {
+                this.$router.push('/hello1/hello134');
+        },  
+        watchCategories() {
+                this.$router.push('/hello1/hello135');
+        },  
 /*
         clickSidebarDropdown(e) {
             console.log("clickSidebarDropdown click function.....")
@@ -818,7 +867,12 @@ export default {
   	filters: {
   	  moment: function (date) {
   	    return moment(date).format('MMMM Do YYYY, h:mm:ss a');
-  	  }
+  	  },
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+        vm.prevRoute = from;
+    })
+},
   	},    //end filters
 };
 </script>

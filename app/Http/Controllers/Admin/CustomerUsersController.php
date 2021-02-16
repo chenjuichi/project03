@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\User as myUser;
+use App\Role;
 
 class CustomerUsersController extends Controller
 {
@@ -25,6 +26,27 @@ class CustomerUsersController extends Controller
         return response()->json(
             [
                 "userAndUserRoles" => $userWithRoles,
+            ]
+        );
+    }
+
+    public function attatchedRole(Request $request)
+    {
+        $users = new myUser();
+        $currentUser = $users->where('id', $request->userId)->first();
+        $currentRole = Role::where('id', $request->roleId)->first();
+
+        //echo $currentUser->name;
+        //echo "\r\n";
+        //echo $currentRole->name;
+
+        //$currentUser->roles()->attach($request->role);
+        //$currentUser->roles()->toggle([$request->roleId]);
+        $currentUser->roles()->sync([$request->roleId]);
+
+        return response()->json(
+            [
+                "message" => $currentUser->name . " has attatched the " . $currentRole->name . " role, ok!"
             ]
         );
     }
