@@ -12,8 +12,9 @@ import Hello132 from "./components/ListRoles.vue";
 //import Hello132 from "./components/iViewHome.vue";
 
 import Hello133 from "./vuex/useCom.vue";
-import Hello134 from "./vuex/tags"
-import Hello135 from "./vuex/category.vue"
+import Hello134 from "./vuex/tags";
+import Hello135 from "./vuex/category.vue";
+import Hello136 from "./vuex/adminUsers.vue";
 
 import Welcome from "./Welcome";
 
@@ -28,9 +29,11 @@ const routes = [
             {path: 'hello133',   name: "hello1.hello133", component: Hello133},
             {path: 'hello134',   name: "hello1.hello134", component: Hello134},
             {path: 'hello135',   name: "hello1.hello135", component: Hello135},
+            {path: 'hello136',   name: "hello1.hello136", component: Hello136},
         ]
     },
     {path: '/hello2',   component: Hello2,  name: "hello2"},
+    //{path: '/hello3',   component: Hello3,  name: "hello3"},
     {path: '/',         component: Welcome, name: "welcome"},
     {path: '*', redirect: '/' }
 ];

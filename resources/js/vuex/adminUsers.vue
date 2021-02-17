@@ -6,7 +6,7 @@
 				<div class="_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20">		
 					<p class="_title0">
 						Tags
-						<Button @click="addModal=true"><Icon type="md-add" size="small" />&nbsp;Add tag</Button>
+						<Button @click="addModal=true"><Icon type="md-add" size="small" />&nbsp;Add Admin</Button>
 					</p>         		
 					
 					<div class="_overflow _table_div">
@@ -14,82 +14,53 @@
 								<!-- TABLE TITLE -->
 							<tr>
 								<th>ID</th>
-								<th>Tag Name</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>User type</th>
 								<th>Created at</th>
 								<th>Action</th>
 							</tr>
 								<!-- TABLE TITLE -->
 
 								<!-- ITEMS -->
-							<!--<div v-if="tags.length" class="_table_vif">-->								
-								<tr v-for="(tag, i) in tags" :key="i">
-									<td>{{ tag.id }}</td>
-									<td class="_table_name">{{ tag.tagName }}</td>
-									<td>{{ tag.created_at }}</td>
+								<tr v-for="(user, i) in users" :key="i">
+									<td>{{ user.id }}</td>
+									<td class="_table_name">{{ user.name }}</td>
+									<td>{{ user.email }}</td>
+									<td>{{ user.userType }}</td>
+									<td>{{ user.created_at }}</td>
 									<td>
-										<Button type="info" size="small" @click="showEditModal(tag, i)">Edit</Button>
-										<Button type="error" size="small" @click="showDeletingModal(tag, i)"  :loading="tag.isDeleting">Delete</Button>
+										<Button type="info" size="small" @click="showEditModal(user, i)">Edit</Button>
+										<Button type="error" size="small" @click="showDeletingModal(user, i)"  :loading="user.isDeleting">Delete</Button>
 									</td>
 								</tr>
-							<!--</div>-->
 								<!-- ITEMS -->
 						</table>
 					</div>
 				</div>
 
 				<!-- tag adding modal -->
-				<!--
 				<Modal 
 					v-model="addModal" 
-					title="Add tag" 
+					title="Add admin" 
 					:mask-closable="false" 
 					:closable="false">
-					<Input v-model="data.tagName" placeholder="Add tag name" />
-					<div slot="footer">
-						<Button 
-							type="default" 
-							@click="addModal=false">
-							Close
-						</Button>
-						<Button 
-							type="primary" 
-							@click="addTag"
-							:disabled="isAdding" 
-							:loading="isAdding">
-							{{isAdding ? 'Adding..' : 'Add tag'}}
-						</Button>						
+					<div class="space">					
+						<Input v-model="data.name" placeholder="Add name" />
 					</div>
-				</Modal>
-				-->
-				<!-- tag adding modal -->
+                    <div class="space">
+                        <Input type="email" v-model="data.email" placeholder="Add email"  />
+                    </div>
+                    <div class="space">
+                        <Input type="password" v-model="data.password" placeholder="Add password"  />
+                    </div>
 
-				<!-- tag adding modal for category -->
-				<Modal 
-					v-model="addModal" 
-					title="Add tag" 
-					:mask-closable="false" 
-					:closable="false">
-					<Input v-model="data.tagName" placeholder="Add tag name" />
-				<!--	
-					<div class="space"></div>
-					<Upload
-						
-						type="drag"
-						:headers="{'x-csrf-token' : token}"
-						action="/api/upload"
+                    <div class="space">
+                        <Select v-model="data.role_id"  placeholder="Select admin type">
+                            <Option :value="r.id" v-for="(r, i) in roles" :key="i">{{r.roleName}}</Option>
+                        </Select>
+                    </div>
 
-						:on-success="handleSuccess"
-						:format="['jpg','jpeg','png']"
-						:max-size="2048"
-						:on-format-error="handleFormatError"
-						:on-exceeded-size="handleMaxSize"						
-						>
-						<div style="padding: 20px 0">
-							<Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
-							<p>Click or drag files here to upload</p>
-						</div>
-					</Upload>					
-				-->
 					<div slot="footer">
 						<Button 
 							type="default" 
@@ -118,24 +89,8 @@
 				<!-- tag editing modal -->
 
 				<!-- tag delete alert modal -->
-				<!--
-				<Modal v-model="showDeleteModal" width="360">
-					<p slot="header" style="color:#f60;text-align:center">
-						<Icon type="ios-information-circle"></Icon>
-						<span>Delete confirmation!</span>
-					</p>
-					<div style="text-align:center">
-						<p>Are you sure you want to delete tag?</p>
-					</div>
-					<div slot="footer">
-						<Button type="error" size="large"  :loading="isDeleting" :disabled="isDeleting" @click="deleteTag">
-							Delete
-						</Button>
-					</div>
-				</Modal>
-				-->
-				<!-- tag delete alert modal -->
 				<delete-modal></delete-modal>
+				<!-- tag delete alert modal -->
             </div>
         </div>        
     </div>
@@ -185,15 +140,28 @@ export default {
 	},
 	
 	async created() {
-		//this.token = Cookies.get('XSRF-TOKEN');		
 		this.token = window.Laravel.csrfToken;		
-		//console.log("token: ", this.token);
 
-		const res = await this.callApi('get', '/api/get_tags');
-		if (res.status === 200) {
-			this.tags = res.data;
-		} else {
-			this.swr();
+		//const res = await this.callApi('get', '/api/get_tags');
+		//if (res.status === 200) {
+		//	this.tags = res.data;
+		//} else {
+		//	this.swr();
+		//}
+
+		const [res, resRole] = await Promise.all([
+			this.callApi('get', 'app/get_users'), 
+			this.callApi('get', 'app/get_roles')
+		])
+		if(res.status==200){
+			this.users = res.data
+		}else{
+			this.swr()
+		}
+		if(resRole.status==200){
+			this.roles = resRole.data
+		}else{
+			this.swr()
 		}
 	},
 
@@ -204,34 +172,26 @@ export default {
 			isLoggedIn: "isLoggedIn",
 			allUsers: "allUsers",
 		}),
-		/*
+		
 		...mapGetters({
-            getDeleteModalObj: "getDeleteModalObj",
+            
 		}),
-		*/
-		somethingElse() {
-			return 1+2;
-		},
+		
+		//somethingElse() {
+		//	return 1+2;
+		//},
 		users() {
 			const nameList = Object.values(this.allUsers).map(item => item.name);
 			return nameList;
         },
 	},
-	/*
+	
 	watch : {
-		getDeleteModalObj(obj) {
-			console.log("watch: ", obj);
-			if (obj.isDeleted) {
-			console.log("inside if...");
-				this.tags.splice(obj.deletingIndex, 1);
-			}
-		}
+
 	},
-	*/
+	
 	methods: {
 		async addTag() {
-			//if (this.data.tagName.trim()=='') 
-			//	return this.e('Tag name is required');
 			const res = await this.callApi('post', '/api/create_tag', this.data);
 			if (res.status===201) {
 				this.tags.unshift(res.data);
@@ -297,19 +257,7 @@ export default {
 			}
             this.$store.dispatch('setDeletingModalObj', deleteModalObj);
 			console.log("tags.vue showDeletingModal function is called...")
-			//this.deleteItem = tag;
-			//this.deletingIndex = i;
-			//this.showDeleteModal = true;
-			/*
-			const deleteModalObj  =  {
-				showDeleteModal: true, 
-				deleteUrl : '/api/delete_tag', 
-				data : tag, 
-				deletingIndex: i, 
-				isDeleted : false,
-			}
-			*/
-			//this.$store.commit('setDeletingModalObj', deleteModalObj);
+
 			console.log('delete method called');
 		},
 		showEditModal(tag, index){

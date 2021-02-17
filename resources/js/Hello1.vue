@@ -53,6 +53,7 @@
         <router-link to="/hello1/hello133"></router-link>
         <router-link to="/hello1/hello134"></router-link>
         <router-link to="/hello1/hello135"></router-link>
+        <router-link to="/hello1/hello136"></router-link>
     </div>
     <router-view></router-view> <!-- Vue Router 代入的內容 -->
 </div>

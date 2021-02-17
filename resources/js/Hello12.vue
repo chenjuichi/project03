@@ -84,6 +84,12 @@
                                     <span class="menu-text">Categories</span>
                                 </a>
                             </li>
+                            <li class="sidebar-dropdown">
+                                <a @click="watchAdminUsers" style="cursor: pointer;">
+                                    <i class="fas fa-users"></i>
+                                    <span class="menu-text">Admin users</span>
+                                </a>
+                            </li>
 
                             <li 
                                 class="sidebar-dropdown" 
@@ -831,6 +837,9 @@ export default {
         },  
         watchCategories() {
                 this.$router.push('/hello1/hello135');
+        },  
+        watchAdminUsers() {
+                this.$router.push('/hello1/hello136');
         },  
 /*
         clickSidebarDropdown(e) {
