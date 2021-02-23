@@ -1,0 +1,514 @@
+    1  lsb_release -a
+    2  sudo apt update
+    3  sudo apt -y upgrade
+    4  sudo cp /etc/crypttab /etc/crypttab.back
+    5  sudo nano /etc/crypttab
+    6  sudo nano /etc/fstab
+    7  sudo nano /etc/uswsusp.conf
+    8  sudo nano /etc/fstab
+    9  sudo nano /etc/uswsusp.conf
+   10  update-initramfs -u
+   11  sudo blkid
+   12  sudo nano /etc/fstab
+   13  sudo nano /etc/initramfs-tools/conf.d/resume
+   14  sudo nano /etc/uswsusp.conf
+   15  sudo nano /etc/initramfs-tools/conf.d/resume
+   16  blkid | awk -F\" '/swap/ {print $2}'
+   17  printf "RESUME=UUID=$(blkid | awk -F\" '/swap/ {print $2}')\n" | sudo tee /etc/initramfs-tools/conf.d/resume
+   18  sudo update-initramfs -u -k all
+   19  sudo apt update
+   20  sudo apt -y upgrade
+   21  blkid | awk -F\" '/swap/ {print $2}'
+   22  sudo swapon --show
+   23  sudo fallocate -l 8G /swapfile1
+   24  sudo chmod 600 /swapfile1
+   25  sudo mkswap /swapfile1
+   26  sudo swapon /swapfile1
+   27  mkdir .ssh
+   28  nano ~/.ssh/authorized_keys
+   29  exit
+   30  chmod go-rwx ~/.ssh ~/.ssh/authorized_keys
+   31  chmod 700 ~/.ssh
+   32  chmod 600 ~/.ssh/authorized_keys
+   33  vim /etc/sysctl.conf
+   34  sudo sysctl -p
+   35  cat /proc/sys/fs/inotify/max_user_watches
+   36  sudo apt-get install openssh-server
+   37  sudo systemctl status ssh
+   38  vim /etc/ssh/sshd_config
+   39  sudo systemctl restart ssh
+   40  sudo apt -y install software-properties-common
+   41  sudo add-apt-repository ppa:ondrej/php
+   42  sudo apt update
+   43  sudo apt -y install php7.4
+   44  sudo apt -y install php7.4-mysql mysql-client mysql-server
+   45  sudo apt -y install php7.4-mbstring php7.4-xml php7.4-zip unzip vim git php7.4-cli php7.4-common php7.4-gd php7.4-curl php7.4-intl php7.4-bcmath php7.4-imap libapache2-mod-php7.4
+   46  php -v
+   47  php -m
+   48  sudo apt autoremove
+   49  php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+   50  php -r "if (hash_file('sha384', 'composer-setup.php') === 'c31c1e292ad7be5f49291169c0ac8f683499edddcfd4e42232982d0fd193004208a58ff6f353fde0012d35fdd72bc394') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+   51  php composer-setup.php
+   52  php -r "unlink('composer-setup.php');"
+   53  ls
+   54  sudo mv composer.phar /usr/local/bin/composer
+   55  ls
+   56  which php
+   57  echo 'export PATH="$HOME/.config/composer/vendor/bin:$PATH"' >> ~/.bashrc
+   58  echo 'export PATH="/usr/bin/php:$PATH"' >> ~/.bashrc
+   59  source ~/.bashrc
+   60  composer global require laravel/installer
+   61  sudo apt -y install nodejs
+   62  sudo apt -y install npm
+   63  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.0/install.sh | bash
+   64  echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bashrc
+   65  echo '#This loads nvm' >> ~/.bashrc
+   66  echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.bashrc
+   67  echo '#This loads nvm bash_completion' >> ~/.bashrc
+   68  echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> ~/.bashrc
+   69  source ~/.bashrc
+   70  nvm --version
+   71  nvm install v12.16.1
+   72  sudo apt -y install git
+   73  composer create-project --prefer-dist laravel/laravel:^7.0 project03
+   74  echo "# my laravel, project03" >> README.md
+   75  git init
+   76  git add README.md
+   77  git commit -m "first commit"
+   78  git config --global user.email "chenjuichi@gmail.com"
+   79  git config --global user.name "chenjuichi"
+   80  git branch -M master
+   81  git branch -M main
+   82  git checkout -b master
+   83  git branch -M master
+   84  git add .
+   85  git commit -m "first commit"
+   86  git branch -M master
+   87  git remote add origin https://github.com/chenjuichi/project03.git
+   88  git push -u origin master
+   89  nano .gitignore
+   90  git remote add origin https://github.com/chenjuichi/project03.git
+   91  ls
+   92  chmod -R 777 storage
+   93  chmod -R 777 bootstrap/cache
+   94  ls
+   95  npm install
+   96  ls
+   97  mysql
+   98  mysql -u root -p
+   99  ls
+  100  composer require laravel/ui:2.*
+  101  php artisan ui vue --auth
+  102  npm install && npm run dev
+  103  npm install vuetify
+  104  npm install vuex --save
+  105  composer require laravel/sanctum
+  106  php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+  107  Copied Directory [/vendor/laravel/sanctum/database/migrations] To [/database/migrations]
+  108  Copied File [/vendor/laravel/sanctum/config/sanctum.php] To [/config/sanctum.php]
+  109  npm install vue-router
+  110  npm install
+  111  npm audit fix
+  112  npm audit
+  113  npm audit --json
+  114  npm set audit false
+  115  npm install
+  116  npm install vue-router
+  117  npm install vue-country-flag
+  118  php artisan make:seeder UserTableSeeder
+  119  php artisan migrate
+  120  php artisan db:seed --class=UserTableSeeder
+  121  php artisan db:seed
+  122  php artisan migrate:fresh --seed
+  123  php artisan make:seeder UsersTableSeeder
+  124  php artisan migrate:fresh --seed
+  125  php artisan serve
+  126  composer.phar show
+  127  composer show
+  128  composer show "php_codesniffer"
+  129  composer show "php_codesniffer --all"
+  130  composer show "php_codesniffer" --all
+  131  composer show "squizlabs/php_codesniffer"
+  132  npm install moment --save
+  133  npm install
+  134  npm --version
+  135  npm run dev
+  136  npm install --save @fortawesome/fontawesome-free
+  137  npm install @mdi/font
+  138  npm install
+  139  npm install --save vue-sweetalert2
+  140  npm install
+  141  npm run dev
+  142  npm run dev
+  143  npm install vue-i18n
+  144  npm install
+  145  npm run dev
+  146  php artisan make:model Role -m
+  147  php artisan make:model Permission -m
+  148  php artisan make:migration create_users_permissions_table
+  149  php artisan make:migration create_users_roles_table
+  150  php artisan make:migration create_roles_permissions_table
+  151  php artisan migrate
+  152  npm run watch
+  153  php artisan serve
+  154  php -S 172.104.39.254:8000 -t public/
+  155  php artisan make:seed PermissionSeeder
+  156  php artisan make:seed RoleSeeder
+  157  php artisan db:seed
+  158  php artisan tinker
+  159  php artisan make:seed UserSeeder
+  160  php artisan db:seed
+  161  php artisan tinker
+  162  php artisan db:seed
+  163  php artisan tinker
+  164  php artisan migrate:fresh --seed
+  165  php artisan db:seed --class=UsersTableSeeder
+  166  php artisan db:seed --class=RoleSeeder
+  167  php artisan db:seed --class=PermissionSeeder
+  168  php artisan db:seed --class=UserSeeder
+  169  php artisan tinker
+  170  php artisan migrate:fresh --seed
+  171  php artisan db:seed --class=UsersTableSeeder
+  172  php artisan db:seed --class=RoleSeeder
+  173  php artisan db:seed --class=PermissionSeeder
+  174  php artisan tinker
+  175  php artisan migrate:fresh --seed
+  176  php artisan tinker
+  177  php artisan migrate:fresh --seed
+  178  php artisan db:seed --class=UserSeeder
+  179  php artisan tinker
+  180  php artisan make:provider PermissionServiceProvider
+  181  php artisan tinker
+  182  ls
+  183  cd database
+  184  ls
+  185  cd seeds
+  186  ls
+  187  php test
+  188  php test.php
+  189  php artisan tinker
+  190  git commit
+  191  git push -u origin master
+  192  git push -u origin main
+  193  php artisan tinker
+  194  php artisan make:controller testController
+  195  php -S 172.104.39.254:8000 -t public/
+  196  git status
+  197  php -S 172.104.39.254:8000 -t public/
+  198  npm run dev
+  199  ls
+  200  nano .gitignore
+  201  npm run dev
+  202  git status
+  203  npm run dev
+  204  npm i material-components-web
+  205  npm uninstall material-components-web
+  206  npm install material-design-icons
+  207  npm install material-icons
+  208  npm install
+  209  npm uninstall material-design-icons
+  210  npm install
+  211  npm run dev
+  212  npm install material-design-icons
+  213  npm install
+  214  npm run dev
+  215  php artisan tinker
+  216  npm run watch
+  217  npm run watch
+  218  php -S 172.104.39.254:8000 -t public/
+  219  php artisan tinker
+  220  npm run watch
+  221  php -V
+  222  php -v
+  223  npm run watch
+  224  php -S 172.104.39.254:8000 -t public/
+  225  npm run watch
+  226  git status
+  227  cd resource
+  228  cd resources
+  229  cd js
+  230  git checkout Hello2.vue
+  231  ls
+  232  git status
+  
+  237  npm run dev
+  
+  243  sudo netstat -plnt
+  244  ps -ef | grep php
+  245  kill -9 21647
+  246  ps -ef | grep php
+  247  php -S 172.104.39.254:8000 -t public/
+  248  npm run watch
+  249  npm run dev
+  250  npm install
+  251  npm run dev
+  252  clear
+  253  npm run watch
+  254  clear
+  255  npm run watch
+  256  php -S 172.104.39.254:8000 -t public/
+  257  npm run watch
+  258  npm show
+  259  npm list
+  260  npm list vue
+  261  php -S 172.104.39.254:8000 -t public/
+  262  npm run watch
+  263  npm i vue-slide-up-down
+  264  npm install
+  265  npm run dev
+  266  php -S 172.104.39.254:8000 -t public/
+  267  git status
+  268  clear
+  269  npm run dev
+   
+  273  php -S 172.104.39.254:8000 -t public/
+  274  npm run watch
+  275  npm run dev
+  276  php -S 172.104.39.254:8000 -t public/
+  277  npm install malihu-custom-scrollbar-plugin
+  278  npm install
+  279  npm run dev
+  280  php -S 172.104.39.254:8000 -t public/
+  281  npm run watch
+  282  npm run dev
+  283  open .bash_profile
+  284  cd ..
+  285  ls
+  286  cd ..
+  287  cd root
+  288  ls
+  289  open 
+  290  open .bash_profile
+  291  cd /root
+  292  open .bash_profile
+  
+  294  php -v
+  295  httpd -v
+  296  http -v
+  297  snap info
+  298  whereis httpd
+  299  rpm -q httpd
+  300  git status
+  301  git add .
+  302  git commit -m "add hello12 for no admin Roles"
+  303  git status
+  304  git push -u origin master
+  305  php -S 172.104.39.254:8000 -t public/
+  306  npx
+  307  npm run watch
+  308  php -S 172.104.39.254:8000 -t public/
+  309  npm run watch
+  310  php artisan make:controller Admin/UsersController --resource
+  311  npm -v eslint-plugin-vue
+  312  php artisan make:controller Admin/CustomerUsersController
+  313  php artisan tinker
+  314  php artisan tinker
+  315  npm run watch
+  316  npm run dev
+  317  php artisan tinker
+  318  php -S 172.104.39.254:8000 -t public/
+  319  npm run watch
+  320  php -S 172.104.39.254:8000 -t public/
+  321  npm run watch
+  322  php -S 172.104.39.254:8000 -t public/
+  323  npm install vue-select
+  324  npm run dev
+  325  npm install
+  326  npm run dev
+  327  npm install
+  328  npm run watch
+  329  php -S 172.104.39.254:8000 -t public/
+  330  npm run watch
+  331  php -S 172.104.39.254:8000 -t public/
+  332  npm uninstall vue-select
+  333  npm install @casl/vue @casl/ability
+  334  npm run watch
+  335  php -S 172.104.39.254:8000 -t public/
+  336  php -S 172.104.39.254:8000 -t public/
+  337  npm run watch
+  338  php -S 172.104.39.254:8000 -t public/
+  339  npm install vue-select
+  340  npm install
+  341  npm run watch
+  342  php -S 172.104.39.254:8000 -t public/
+  343  npm run watch
+  344  npm install bootstrap-select
+  
+  
+  351  git status
+  
+  356  cd ..
+  357  sudo apt install python3.9
+  358  sudo apt update
+  359  sudo add-apt-repository ppa:deadsnakes/ppa
+  360  sudo apt update
+  361  sudo apt install python3.9
+  362  ls
+  363  cd ..
+  364  ls
+  365  cd usr
+  366  ls
+  367  cd bin
+  368  ls
+  369  cd python3.9
+  370  cd ..
+  371  python-project
+  372  md python-projects
+  373  mkdir python-projects
+  374  sudo apt update
+  375  sudo apt -y upgrade
+  376  python --version
+  377  php -v
+  378  export PATH="$PATH:/usr/bin/python3
+  379  quit()
+  380  quit
+  381  exit
+  382  exit()
+  383  q
+  384  exit():
+  385  echo $PATH
+  386  echo 'export PATH="/usr/bin/python3:$PATH"' >> ~/.bashrc
+  387  source ~/.bashrc
+  388  echo $PATH
+  389  python --version
+  390  sudo apt install python3-pip
+  391  python3 --version
+  392  sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.6.9 1
+  393  sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.6 1
+  394  python --ver
+  395  python --version
+  396  sudo update-alternatives --config python
+  397  sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 2
+  398  python --version
+  399  sudo apt install python3.9 
+  400  cd ..
+  401  ls
+  402  cd ..
+  403  ls
+  404  cd ..
+  405  ls
+  406  cd ..
+  407  ls
+  408  sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.9 3
+  409  sudo update-alternatives --config python
+  410  echo 'export PATH="/usr/local/bin/python3:$PATH"' >> ~/.bashrc
+  411  source ~/.bashrc
+  412  pip3 install pygame
+  413  pip install pygame
+  414  apt install python-pip
+  415  pip install pygame
+  416  apt install python3-pip
+  417  apt autoremove
+  418  pip3 --version
+  419  pip3 install pygame
+  420  pip3 list
+  421  pip install pygame
+  422  python3 -m pip install matplotlib
+  423  python3 -m pip install pygame
+  424  python3 -m pip list
+  425  python3 pip list
+  426  python3 -m pip list
+  427  pip install matplotlib
+  428  pip list
+  429  pip3 list
+  430  path
+  431  help path
+  432  cd ..
+  433  ls
+  434  path
+  435  dpkg --list
+  436  sudo apt-get remove python3.9
+  437  sudo apt-get autoremove
+  438  sudo apt-get purge python3.9
+  439  dpkg --list
+  440  sudo apt-get remove python3.9-mini
+  441  sudo apt-get autoremove
+  442  sudo apt-get purge python3.9-mini
+  443  dpkg --list
+  444  sudo apt-get remove python3.6
+  445  sudo apt-get autoremove
+  446  sudo apt-get purge python3.6
+  447  dpkg --list
+  448  sudo apt-get remove python3.6-mini
+  449  sudo apt-get autoremove
+  450  sudo apt-get purge python3.6-mini
+  451  dpkg --list
+  452  sudo apt-get remove python3-twiste
+  453  sudo apt-get autoremove
+  454  sudo apt-get purge python3-twiste
+  455  dpkg --list
+  456  sudo apt-get remove python3
+  457  sudo apt-get autoremove
+  458  sudo apt-get purge python3
+  459  dpkg --list
+  460  sudo apt-get autoremove
+  461  dpkg --list
+  462  cd ..
+  463  sudo apt-get install sshfs
+  464  ls
+  465  cd python-projects
+  466  cd ..
+  467  sshfs root@172.104.39.254:/root python-projects
+  468  sshfs root@172.104.39.254:/root/python-projects ~/mnt -o reconect
+  469  sshfs root@172.104.39.254:/root python-projects -o reconnect
+  470  ls vm
+  471  ls
+  472  dpkg --list
+  473  ip address
+  474  ping 172.104.39.254
+  475  mount
+  476  df -h
+  
+  488  npm uninstall view-design --save
+  489  npm install
+  490  npm install view-design --save
+  491  npm run watch
+  492  npm run watch
+  493  php -S 172.104.39.254:8000 -t public/
+  494  php artisan make:controller AdminController
+  495  php artisan make:model Tag --migration
+  496  php artisan make:model Category --migration
+  497  php artisan make:model Blog --migration
+  498  php artisan make:model Blogtag -m
+  499  php artisan make:model Blogcategory -m
+  500  php artisan make:migration add_usertype_to_users_table --table=users
+  501  php artisan migrate
+  502  npm install view-design --save
+  503  npm install
+  504  npm run dev
+    
+  517  composer require guzzlehttp/guzzle
+  518  php -S 172.104.39.254:8000 -t public/
+  519  php artisan storage:link
+  520  npm run watch
+  521  php -S 172.104.39.254:8000 -t public/
+  522  php artisan storage:link
+  523  npm run watch
+  524  clear
+  
+  540  git status
+  541  git add .
+  542  git add *.vue
+  543  git status
+  544  git commit -m "add category and tag files"
+  545  git push origin master
+  546  npm run watch
+  547  git status
+  548  git add .
+  549  git commit -m "add category and tag files again"
+  550  git push origin master
+  551  git status
+  552  git checkout resources/js/vuex/comB.vue
+  553  git checkout resources/js/vuex/comC.vue
+  554  git status
+  
+  560  php artisan make:migration remove_usertype_from_users_table --table=users
+  561  php artisan migrate
+  562  npm run watch
+  563  git status
+   
+    
+  567  php artisan route:list
+  
+  570  npm cache verify
+  
