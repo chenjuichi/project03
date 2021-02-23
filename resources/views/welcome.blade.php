@@ -40,7 +40,13 @@
 
 <body>
     <div id="app">
-        <hello></hello>
+        @if(Auth::check())
+        <!--<hello :user="{{Auth::user()}}" :permission="{{Auth::user()->role->permission}}"></hello>-->
+        <hello :user="{{Auth::user()}}"></hello>
+        @else
+        <hello :user="false"></hello>
+        @endif
+        <!--<hello></hello>-->
     </div>
 </body>
 

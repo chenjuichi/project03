@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Tag;
 use App\Category;
+use App\Role;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -273,15 +274,97 @@ class AdminController extends Controller
         return Category::where('id', $request->id)->delete();
     }
 
-    public function deleteFileFromServer($fileName, $hasFullPath = false)
+    //public function deleteFileFromServer($fileName, $hasFullPath = false)
+    //{
+    //    if (!$hasFullPath) {
+    //        $filePath = public_path() . '/upload/' . $fileName;
+    //    }
+    //    if (file_exists($filePath)) {
+    //        @unlink($filePath);
+    //    }
+    //
+    //    return;
+    //}
+
+    public function getRoles()
     {
-        if (!$hasFullPath) {
-            $filePath = public_path() . '/upload/' . $fileName;
+        return Role::all();
+    }
+
+    public function assignRole(Request $request)
+    {
+        $this->validate($request, [
+            'permission' => 'required',
+            'id' => 'required',
+        ]);
+        return Role::where('id', $request->id)->update([
+            'permission' => $request->permission,
+        ]);
+    }
+
+    public function createUser(Request $request)
+    {
+        // validate request
+        $this->validate($request, [
+            'fullName' => 'required',
+            'email' => 'bail|required|email|unique:users',  //email必須在users table是唯一的
+            'password' => 'bail|required|min:8|max:30',     //assign the bail rule => if the min rule , the max rule will not be checked. 
+            'role_id' => 'required',
+        ]);
+
+        $password = bcrypt($request->password);
+
+        //$currentRole = Role::where('id', $request->role_id)->first();
+
+        $user = User::create([
+            'name' => $request->fullName,
+            'email' => $request->email,
+            'password' => $password,
+            //'userType' => $currentRole->name,
+        ]);
+
+        //$currentRole = Role::where('id', $request->role_id)->first();
+        $user->roles()->sync([$request->role_id]);
+
+        return $user;
+    }
+
+    public function editUser(Request $request)
+    {
+        // validate request
+        $this->validate($request, [
+            'fullName' => 'required',
+            'email' => "bail|required|email|unique:users,email,$request->id", //email may changed, but nedd unique
+            'password' => 'bail|required|min:8|max:30',
+            'role_id' => 'required',
+        ]);
+
+        $data = [
+            'name' => $request->fullName,
+            'email' => $request->email,
+            //'userType' => $request->userType,
+        ];
+
+        if ($request->password) {
+            $password = bcrypt($request->password);
+            $data['password'] = $password;
         }
-        if (file_exists($filePath)) {
-            @unlink($filePath);
-        }
-    
-        return;
-    }   
+
+        $user = User::where('id', $request->id)->update($data);
+
+        $userUpdate = User::where('id', $request->id)->first();
+
+        $userUpdate->roles()->detach();
+
+        $userUpdate->roles()->sync([$request->role_id]);
+
+        return $userUpdate;
+    }
+
+    public function getUsers()
+    {
+        //return User::get();
+        //return User::where('userType', '==', 'Administrator')->get();
+        return User::with('roles')->get();
+    }
 }
